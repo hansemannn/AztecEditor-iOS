@@ -107,10 +107,12 @@ public class EditorView: UIView {
         
         self.htmlTextView = htmlTextView
         self.richTextView = richTextView
-
-        htmlTextView.smartInsertDeleteType = .no
-        htmlTextView.smartDashesType = .no
-        htmlTextView.smartQuotesType = .no
+        
+        if #available(iOS 11, *) {
+            htmlTextView.smartInsertDeleteType = .no
+            htmlTextView.smartDashesType = .no
+            htmlTextView.smartQuotesType = .no
+        }
         
         super.init(coder: aDecoder)
         
@@ -127,10 +129,12 @@ public class EditorView: UIView {
 
         self.htmlTextView = UITextView(frame: .zero, textContainer: container)
         self.richTextView = TextView(defaultFont: defaultFont, defaultParagraphStyle: defaultParagraphStyle, defaultMissingImage: defaultMissingImage)
-
-        htmlTextView.smartInsertDeleteType = .no
-        htmlTextView.smartDashesType = .no
-        htmlTextView.smartQuotesType = .no
+        
+        if #available(iOS 11, *) {
+            htmlTextView.smartInsertDeleteType = .no
+            htmlTextView.smartDashesType = .no
+            htmlTextView.smartQuotesType = .no
+        }
         
         super.init(frame: .zero)
         

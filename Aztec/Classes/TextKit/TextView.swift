@@ -406,8 +406,11 @@ open class TextView: UITextView {
         defaultParagraphStyle: ParagraphStyle = ParagraphStyle.default,
         defaultMissingImage: UIImage) {
 
-        self.defaultFont = UIFontMetrics.default.scaledFont(for: defaultFont)
-        
+        if #available(iOS 11.0, *) {
+            self.defaultFont = UIFontMetrics.default.scaledFont(for: defaultFont)
+        } else {
+            self.defaultFont = defaultFont
+        }
         self.defaultParagraphStyle = defaultParagraphStyle
         self.defaultMissingImage = defaultMissingImage
 
@@ -434,8 +437,9 @@ open class TextView: UITextView {
 
     private func commonInit() {
         allowsEditingTextAttributes = true
-        adjustsFontForContentSizeCategory = true
-
+        if #available(iOS 10.0, *) {
+            adjustsFontForContentSizeCategory = true
+        }
         storage.attachmentsDelegate = self
         font = defaultFont
         linkTextAttributes = [.underlineStyle: NSNumber(value: NSUnderlineStyle.single.rawValue), .foregroundColor: tintColor as Any]
